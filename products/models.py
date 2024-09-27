@@ -29,10 +29,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.product.name} by {self.user.username}"
-
-class Inventory(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-
-    def __str__(self):
-        return f"Inventory for {self.product.name}"

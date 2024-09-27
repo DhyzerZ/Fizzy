@@ -39,14 +39,6 @@ class PaymentTransaction(models.Model):
     def __str__(self):
         return f"Payment for Order {self.order.id}"
 
-class Invoice(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE)
-    invoice_date = models.DateTimeField(auto_now_add=True)
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-
-    def __str__(self):
-        return f"Invoice for Order {self.order.id}"
-
 class ShoppingCart(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through='CartItem')

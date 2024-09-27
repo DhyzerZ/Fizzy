@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Order, OrderItem, PaymentTransaction, ShoppingCart, CartItem
+from .models import Order, OrderItem, PaymentTransaction, Invoice
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,14 +18,7 @@ class PaymentTransactionSerializer(serializers.ModelSerializer):
         model = PaymentTransaction
         fields = '__all__'
 
-class CartItemSerializer(serializers.ModelSerializer):
+class InvoiceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CartItem
-        fields = '__all__'
-
-class ShoppingCartSerializer(serializers.ModelSerializer):
-    items = CartItemSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = ShoppingCart
+        model = Invoice
         fields = '__all__'

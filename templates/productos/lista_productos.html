@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lista de Productos</title>
+</head>
+
+<body>
+    <h1>Lista de Productos</h1>
+    <ul>
+        <!-- Iteramos sobre la lista de productos que pasamos desde la vista -->
+        {% for producto in productos %}
+        <li>
+            <strong>{{ producto.name }}</strong><br>
+            Descripción: {{ producto.description }}<br>
+            Precio: ${{ producto.price }}<br>
+            <a href="{% url 'detalle_producto' producto.pk %}">Ver detalles</a>
+        </li>
+        {% empty %}
+        <li>No hay productos disponibles.</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

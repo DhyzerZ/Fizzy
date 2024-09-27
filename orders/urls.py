@@ -1,14 +1,7 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import OrderViewSet, OrderItemViewSet, PaymentTransactionViewSet, ShoppingCartViewSet, CartItemViewSet
-
-router = DefaultRouter()
-router.register(r'orders', OrderViewSet)
-router.register(r'order-items', OrderItemViewSet)
-router.register(r'payments', PaymentTransactionViewSet)
-router.register(r'carts', ShoppingCartViewSet)
-router.register(r'cart-items', CartItemViewSet)
+from django.urls import path
+from .views import generar_factura_pdf
 
 urlpatterns = [
-    path('', include(router.urls)),
+    # Otras rutas de orders
+    path('factura/<int:order_id>/', generar_factura_pdf, name='generar_factura_pdf'),
 ]

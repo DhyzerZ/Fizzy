@@ -17,7 +17,7 @@ class Order(models.Model):
         return f"Order {self.id} by {self.user.username}"
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')  
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     subtotal = models.DecimalField(max_digits=10, decimal_places=2)
@@ -38,6 +38,14 @@ class PaymentTransaction(models.Model):
 
     def __str__(self):
         return f"Payment for Order {self.order.id}"
+
+class Invoice(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    invoice_date = models.DateTimeField(auto_now_add=True)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Invoice for Order {self.order.id}"
 
 class ShoppingCart(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

@@ -16,9 +16,11 @@ class Product(models.Model):
     brand = models.CharField(max_length=100)
     images = models.JSONField()  # Almacena URLs de imágenes como una lista
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    ventas = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
+    
 
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
@@ -29,3 +31,10 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.product.name} by {self.user.username}"
+
+class Inventory(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f"Inventory for {self.product.name}"
